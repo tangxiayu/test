@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width:200px;height:200px;background-color: red;;
+        }
+    </style>
+    <script>
+        function getStyle(obj,name){
+            if(obj.currentStyle){
+                return obj.currentStyle[name];
+            }else{
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+        window.onload = function(){
+            var oDiv = document.getElementById('div1');
+            console.log(getStyle(oDiv,'background-color'));
+        };
+
+        var a = "";
+        alert(typeof(a));
+
+
+    </script>
+</head>
+<body>
+<div id="div1">2222222222</div>
+</body>
+</html>

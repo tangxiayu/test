@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        //不能去重hash对象
+        function unique(arr){
+            var newArr = [];
+            for(var i= 0,len=arr.length; i<len; i++){
+                if(newArr.indexOf(arr[i]) == -1){
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+
+        var arr = [10,20,30,40,10,22,30];
+        console.log(unique(arr));
+
+
+
+
+        /*方法一改进版：所有hash对象,如：{x;1}，{y:1}会被认为是相同的  //30ms*/
+        Array.prototype.unique=function(){
+            var newArr=[],obj={};
+            for(var i=0,len=this.length;i<len;i++){
+                if(!obj[typeof(this[i])+this[i]]){
+                    newArr.push(this[i]);
+                    obj[typeof(this[i])+this[i]]=this[i];
+                }
+            }
+            return newArr;
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

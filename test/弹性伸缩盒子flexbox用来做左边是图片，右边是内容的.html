@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        body{width:100%;}
+        .myContent{width:100%;display:flex;justify-content:left;background-color: #1b809e;border-radius:10px;margin:20px 0;}
+        .myContent .img{width:200px;background:yellow;}
+        /*.myContent .mainContent{background-color: #00CC00;}*/
+    </style>
+</head>
+<body>
+    <div class="myContent">
+        <div class="img">我是固定大小的图片1</div>
+        <div class="mainContent">我是宽度可伸缩的内容区<br/>域我是宽度可伸缩的内容区域我
+            是宽度可伸缩的内容区域我是宽度可伸缩的内容区域
+
+        </div>
+    </div>
+    <div class="myContent">
+        <div class="img">我是固定大小的图片2</div>
+        <div class="mainContent">我是宽度可伸缩的内容区域我是宽度可伸缩的内容区域我
+            是宽度可伸缩的内容区域我是宽度可伸缩
+            <div style="width:300px;height:200px;">22222</div>
+        </div>
+    </div>
+    <div class="myContent">
+        <div class="img">我是固定大小的图片3</div>
+        <div class="mainContent">我是宽度可伸缩的内容区
+            <div style="width:300px;height:200px;">33333</div>
+        </div>
+    </div>
+</body>
+</html>

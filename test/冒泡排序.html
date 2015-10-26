@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function Bubble(arr){
+            var temp = 0;
+            for(var i=0; i<arr.length; i++){
+                for(var j=0; j<arr.length; j++){
+                    if(arr[j]>arr[j+1]){
+                        temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[i] = temp;
+                    }
+                }
+            }
+
+        }
+
+        var arr = [1,10,-2,100,0];
+        Bubble(arr);
+        console.log(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
