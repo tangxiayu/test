@@ -7,7 +7,7 @@
         *{margin:0;padding:0;}
         ul{list-style:none;}
         body{width:100%;}
-        .div1{position:relative;margin:100px auto;width:300px;height:250px;}
+        .div1{position:relative;margin:100px auto;width:300px;height:250px;overflow:hidden;}
         .div1 .ul1{position: absolute;left:0;top:0;height:250px;}
         .div1 .ul1 li{width:300px;height:250px;float:left;}
         .div1 .ul1 li img{width:100%;height:100%;}
@@ -20,62 +20,69 @@
     </style>
     <script src="js/jquery-1.11.2.js"></script>
     <script>
+
+
+        //在切换中还有问题，超出4张之后，切换方式不是从左到右，而是突然出现
         $(function(){
-            $('.ul1').html($('.ul1').html()+$('.ul1').html());
             var ulWidth = $('.ul1>li').eq(0).width()*$('.ul1>li').length+'px';
             var liWidth = $('.ul1>li').eq(0).width();
             var len = $('.ul1>li').length;
-            $('.ul1').css("width",ulWidth);
-            $('.ul1').css("left",-liWidth*len/2+'px');
+            $('.ul1').css("width",ulWidth);  //js设置ul宽度
+
             var timer = null;
             var now = 0;
-
-            /*function move(){
-                if($('.ul1').position().left<-$('.ul1').width()/2){
-                    $('.ul1').css("left",0);
-                }
-                if($('.ul1').position().left>0){
-                    var w = -$('.ul1').width()/2+'px';
-                    $('.ul1').css("left",w);
-                }
-                var l = $('.ul1').position().left+speed+'px';
-                //alert(l);
-               /!* $('.ul1').animate({
-                    "left":l
-                },'fast');*!/
-                $('.ul1').css("left",l);
-            }*/
 
             function tab(index){
                 $('.ul1').animate({
                     "left":-index*liWidth+'px'
                 });
             }
+
+
             function next(){
-                tab(now);
-                now++;
-                if(now == len/2){
-                    now = 0;
+                if(now < len-1){  //len :4
+                    now += 1;
+                    tab(now);
+                }
+                else if(now >= len-1){
+                    //把第一张复制，然后放到最后，再把第一张移除，把left一直为3个宽度值
+                    var newLi = $('.ul1 >li').eq(0).clone(true);
+                    $('.ul1').append(newLi);
+                    $('.ul1>li').eq(0).remove();
+                    $('.ul1').animate({
+                        "left":-(len-1)*liWidth+'px'
+                    });
                 }
             }
+
+
             $('.div1').hover(function(){
                 clearInterval(timer);
             },function(){
                 timer = setInterval(next,1000);
             }).trigger('mouseleave');
+
+
             $('.next').click(function(){
-                now += 1;
-                if(now == len/2){
-                    now = 0;
-                }
-                tab(now);
+                next();
             });
             $('.prev').click(function(){
-                now -= 1;
-                if(now == -1){
-                    now = len/2 -1;
+                if(now > 0){
+                    now -= 1;
+                    tab(now);
                 }
-                tab(now);
+                else if(now <= 0){
+                    //把最后一张图复制，然后放到最前面，然后再把最后一张移除 ，left一直为0
+                    var newLi1 = $('.ul1').children().eq(3).clone(true);
+                    console.log(newLi1.find('img').attr('src'));
+                    $('.ul1').prepend(newLi1);
+                    $('.ul1>li').eq(4).remove();
+                    //console.log($('.ul1>li').length);
+                    //console.log($('.ul1').position().left);
+                    $('.ul1').animate({
+                        "left":0
+                    });
+                }
             });
         });
     </script>
